@@ -9,3 +9,4 @@ export * from './paginators';
 export * from './pagination';
 export * from './split';
 export * from './date';
+export * from './updates';
