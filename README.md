@@ -12,6 +12,18 @@ A Discord bot to clean up your server. Built using [TypeScript bot template](htt
 - Remove (recent) messages in a channel
 - Delete channels, categories, roles, emojis, or everything all at once!
 
+### Commands
+
+At present, all commands ask you for confirmation before executing to prevent accidental deletions.
+
+- `/clean channel` - Remove all messages in the current channel
+- `/clean recent <timespan>` - Remove all recent messages in the current channel
+- `/delete all` - Delete all channels, categories, roles, and emojis in the entire server (be careful!)
+- `/delete channels` - Delete all channels and categories in the entire server
+- `/delete roles` - Delete all roles in the entire server
+- `/delete emojis` - Delete all emojis in the entire server
+- `/delete category <category>` - Delete a specific category and all channels inside of it
+
 ## How to use
 
 This bot is not hosted anywhere, and not available as a public bot. If you want to use it, you are free to host it yourself and change it anyway you like.
