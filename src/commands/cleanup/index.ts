@@ -1,5 +1,6 @@
 import { category } from '../../utils';
-import deleteCmd from './delete';
+import clean from './clean';
+import delete_ from './delete';
 
 export default category(
   {
@@ -7,5 +8,5 @@ export default category(
     description: 'Commands used for cleaning up.',
     emoji: '🧹',
   },
-  [deleteCmd]
+  [delete_, clean]
 );

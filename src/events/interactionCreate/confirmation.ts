@@ -83,6 +83,51 @@ export default event('interactionCreate', async (_, interaction) => {
         }
       }
       break;
+    case 'clean':
+      switch (action) {
+        case 'channel': {
+          const messages = await interaction.channel?.messages.fetch();
+          if (!messages)
+            return await update.error(interaction, 'Failed to fetch messages!');
+          const msgs: {
+            delete(reason?: string | undefined): Promise<any>;
+          }[] = [];
+          messages.forEach((msg) => msgs.push(msg));
+
+          const result = await Promise.all(
+            messages ? msgs.map((msg) => msg.delete().catch(() => false)) : []
+          );
+
+          return await update.success(
+            interaction,
+            `Deleted ${result.length} message(s)!`
+          );
+        }
+        case 'recent': {
+          const timespan = parseInt(args[0]);
+          const refTimestamp = Date.now() - timespan * 60 * 60 * 1000;
+
+          const messages = await interaction.channel?.messages.fetch();
+          if (!messages)
+            return await update.error(interaction, 'Failed to fetch messages!');
+          const msgs: {
+            delete(reason?: string | undefined): Promise<any>;
+          }[] = [];
+          messages.forEach((msg) => {
+            if (msg.createdTimestamp >= refTimestamp) msgs.push(msg);
+          });
+
+          const result = await Promise.all(
+            messages ? msgs.map((msg) => msg.delete().catch(() => false)) : []
+          );
+
+          return await update.success(
+            interaction,
+            `Deleted ${result.length} message(s)!`
+          );
+        }
+      }
+      break;
     default: {
       await update.error(interaction);
     }
